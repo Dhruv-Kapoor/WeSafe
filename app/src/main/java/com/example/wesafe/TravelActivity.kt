@@ -1,17 +1,22 @@
 package com.example.wesafe
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ComponentName
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.location.LocationManager
 import android.os.Bundle
 import android.os.IBinder
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
@@ -40,6 +45,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+
 private const val RC_CAPTURE = 100
 private const val TAG = "TravelActivity"
 
@@ -65,6 +71,10 @@ class TravelActivity : AppCompatActivity(), OnMapReadyCallback, TravelService.Lo
     }
 
     private var viewModel: TravelActivityViewModel? = null
+
+    private val locationManager by lazy {
+        getSystemService(LocationManager::class.java)
+    }
 
     private var mService: TravelService? = null
 
@@ -164,15 +174,40 @@ class TravelActivity : AppCompatActivity(), OnMapReadyCallback, TravelService.Lo
             mService?.stop()
         }
         if (checkLocationPermission()) {
-            LocationServices.getFusedLocationProviderClient(this).lastLocation.addOnSuccessListener {
+            if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+                showAlertMessageNoGps()
+            }
+            moveToCurrentLocation()
+        }
+
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun moveToCurrentLocation() {
+        LocationServices.getFusedLocationProviderClient(this).lastLocation.addOnSuccessListener {
+            if (it != null) {
                 mMap?.moveCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(it.latitude, it.longitude),
                         13.toFloat()
                     )
                 )
+            }else{
+                moveToCurrentLocation()
             }
         }
+    }
+
+    private fun showAlertMessageNoGps() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Please turn on your GPS to use this feature.")
+            .setCancelable(false)
+            .setPositiveButton("Go to settings",
+                DialogInterface.OnClickListener { _, _ -> startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
+
+        val alert: AlertDialog = builder.create()
+        alert.show()
     }
 
     private fun startTravelService() {

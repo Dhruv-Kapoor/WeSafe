@@ -1,11 +1,15 @@
 package com.example.wesafe
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Criteria
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -44,6 +48,9 @@ class DangerZonesActivity : AppCompatActivity(), OnMapReadyCallback,
     private var currentCameraLatLng = LatLng(0.0, 0.0)
     private var currentPosLatLng = LatLng(0.0, 0.0)
 
+    private val locationManager by lazy {
+        getSystemService(LocationManager::class.java)
+    }
     private var mFusedLocationClient: FusedLocationProviderClient? = null
     private lateinit var mLocationRequest: LocationRequest
     private val mLocationCallback: LocationCallback = object : LocationCallback() {
@@ -71,14 +78,10 @@ class DangerZonesActivity : AppCompatActivity(), OnMapReadyCallback,
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if (checkLocationPermission()) {
-            LocationServices.getFusedLocationProviderClient(this).lastLocation.addOnSuccessListener {
-                mMap?.moveCamera(
-                    CameraUpdateFactory.newLatLngZoom(
-                        LatLng(it.latitude, it.longitude),
-                        13.toFloat()
-                    )
-                )
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                showAlertMessageNoGps()
             }
+            moveToCurrentLocation()
         }
 
         fabMarkSafe.setOnClickListener {
@@ -114,10 +117,41 @@ class DangerZonesActivity : AppCompatActivity(), OnMapReadyCallback,
         }
     }
 
+    @SuppressLint("MissingPermission")
+    private fun moveToCurrentLocation() {
+        LocationServices.getFusedLocationProviderClient(this).lastLocation.addOnSuccessListener {
+            if (it != null) {
+                val latLng = LatLng(it.latitude, it.longitude)
+                currentCameraLatLng = latLng
+                mMap?.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        latLng,
+                        13.toFloat()
+                    )
+                )
+                refreshDangerZones()
+            } else {
+                moveToCurrentLocation()
+            }
+        }
+    }
+
+    private fun showAlertMessageNoGps() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Please turn on your GPS to use this feature.")
+            .setCancelable(false)
+            .setPositiveButton("Go to settings",
+                DialogInterface.OnClickListener { _, _ -> startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)) })
+
+        val alert: AlertDialog = builder.create()
+        alert.show()
+    }
+
     private fun markCurrentLocationUnsafe() {
         val t = currentPosLatLng
         val zoneId = getZoneForLatLng(t)
-        val localRef = firestore.document(t.latitude.toInt().toString()).collection(t.longitude.toInt().toString())
+        val localRef = firestore.document(t.latitude.toInt().toString())
+            .collection(t.longitude.toInt().toString())
         if (zoneId != null) {
             localRef.document(zoneId).get().addOnSuccessListener {
                 val zone = it.toObject(DangerZone::class.java) ?: return@addOnSuccessListener
@@ -144,7 +178,8 @@ class DangerZonesActivity : AppCompatActivity(), OnMapReadyCallback,
         val t = currentPosLatLng
         val zoneId = getZoneForLatLng(t)
         if (zoneId != null) {
-            val localRef = firestore.document(t.latitude.toInt().toString()).collection(t.longitude.toInt().toString())
+            val localRef = firestore.document(t.latitude.toInt().toString())
+                .collection(t.longitude.toInt().toString())
             localRef.document(zoneId).get().addOnSuccessListener {
                 val zone = it.toObject(DangerZone::class.java) ?: return@addOnSuccessListener
                 zone.safeCount += 1
