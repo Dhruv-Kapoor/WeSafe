@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="textColorPrimary"/>
+    <attr name="textColorSecondary"/>
+
+    <attr name="textSizeXXS"/>
+    <attr name="textSizeXS"/>
+    <attr name="textSizeS"/>
+    <attr name="textSizeM"/>
+    <attr name="textSizeL"/>
+    <attr name="textSizeXL"/>
+    <attr name="textSizeXXL"/>
+</resources>

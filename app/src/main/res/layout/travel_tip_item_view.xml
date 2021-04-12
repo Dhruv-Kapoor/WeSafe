@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="20dp"
+    tools:layout_height="200dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/traveltip1" />
+
+    <TextView
+        android:id="@+id/tvTipNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/text_bg"
+        android:paddingHorizontal="8dp"
+        android:text="Tip #1"
+        android:textColor="@color/white"
+        android:textSize="?attr/textSizeXXL"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="12dp"
+        android:background="@drawable/text_bg"
+        android:paddingHorizontal="8dp"
+        android:text="Complaint"
+        android:textColor="@color/white"
+        android:textSize="?attr/textSizeXL"
+        android:textStyle="bold" />
+
+</com.google.android.material.card.MaterialCardView>

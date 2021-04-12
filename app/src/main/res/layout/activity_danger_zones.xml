@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TravelActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/green"
+            android:theme="@style/Theme.AppCompat"
+            app:title="Danger Zones" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMarkUnsafe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/view1"
+        app:layout_anchorGravity="top|end"
+        android:layout_margin="18dp"
+        android:backgroundTint="@color/red"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/caution"
+        app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"/>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        app:layout_anchorGravity="top|end"
+        app:layout_anchor="@id/fabMarkSafe"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabMarkSafe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="18dp"
+        android:backgroundTint="@color/brightGreen"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/safe"
+        app:maxImageSize="32dp"
+        app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

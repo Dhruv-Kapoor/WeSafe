@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1003350233743",
+    "firebase_url": "https://womens-safety-309919-default-rtdb.firebaseio.com",
+    "project_id": "womens-safety-309919",
+    "storage_bucket": "womens-safety-309919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003350233743:android:bae09849ec8dbc1ba916fa",
+        "android_client_info": {
+          "package_name": "com.example.wesafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003350233743-8ncp4nbd77mtmrj0jt41qhr1l77m78kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlH9RasIGEay-gMts2Tb4CGof-g1CKL-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003350233743-8ncp4nbd77mtmrj0jt41qhr1l77m78kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

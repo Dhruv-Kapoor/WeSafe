@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ComplaintsActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:theme="@style/Theme.AppCompat"
+        app:title="Complaints" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/light_gray_rounded_20"
+                android:paddingHorizontal="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvEmail"
+                    android:textSize="?attr/textSizeL"
+                    android:layout_gravity="center_vertical"
+                    tools:text="dhruvkapoor.200@gmail.com"/>
+            </FrameLayout>
+            
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Complaint Type"
+                android:textColor="@color/lighterDarkGray"
+                android:textSize="?attr/textSizeM" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/light_gray_rounded_20"
+                android:paddingHorizontal="10dp">
+
+                <Spinner
+                    android:id="@+id/complaintTypeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Decription"
+                android:textColor="@color/lighterDarkGray"
+                android:textSize="?attr/textSizeM" />
+
+            <EditText
+                android:id="@+id/etComplaintDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/light_gray_rounded_20"
+                android:gravity="top"
+                android:hint="Enter complaint description"
+                android:inputType="textMultiLine"
+                android:minLines="10"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="15dp"
+                android:scrollHorizontally="false"
+                android:textSize="?attr/textSizeM" />
+
+            <TextView
+                android:id="@+id/btnSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/green_gradient_50"
+                android:gravity="center"
+                android:text="Submit"
+                android:textColor="@android:color/white"
+                android:textSize="?attr/textSizeXL"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

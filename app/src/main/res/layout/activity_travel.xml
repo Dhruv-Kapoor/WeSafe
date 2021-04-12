@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/rootLayout"
+    tools:context=".TravelActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:theme="@style/Theme.AppCompat"
+            app:title="Travel" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    <LinearLayout
+        android:id="@+id/vehicleNumberSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorBackground"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:behavior_hideable="false"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter/Scan vehicle number:"
+            android:textColor="?attr/textColorPrimary"
+            android:textSize="?attr/textSizeXL"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etVehicleNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Vehicle No."
+                    android:textColor="?attr/textColorPrimary"
+                    android:textSize="?attr/textSizeM" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:text="OR"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="?attr/textSizeL" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:orientation="vertical"
+                android:id="@+id/scan">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_scan_text"
+                    app:tint="@color/green" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Scan"
+                    android:textColor="?attr/textColorPrimary"
+                    android:textSize="?attr/textSizeS" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvStartButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/green_gradient_50"
+            android:gravity="center"
+            android:text="Start"
+            android:textColor="@android:color/white"
+            android:textSize="?attr/textSizeXL"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/driverSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorBackground"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:behavior_peekHeight="150dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProfilePic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@drawable/sample_avatar"
+                android:theme="@style/CircularImageView" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivProfilePic"
+                android:layout_alignStart="@id/ivProfilePic"
+                android:layout_alignEnd="@id/ivProfilePic"
+                android:layout_marginTop="4dp"
+                android:text="Divyaansh"
+                android:textAlignment="center"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="?attr/textSizeM" />
+
+            <TextView
+                android:id="@+id/tvVehicleNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tvVehicleModel"
+                android:layout_alignParentEnd="true"
+                android:text="DL-1208"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="?attr/textSizeXL"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvVehicleModel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/ivProfilePic"
+                android:layout_alignParentEnd="true"
+                android:text="Maruti 800"
+                android:textColor="?attr/textColorPrimary"
+                android:textSize="?attr/textSizeM" />
+
+            <RatingBar
+                android:id="@+id/rating"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tvName"
+                android:layout_alignParentEnd="true"
+                android:rating="1" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTravelTips"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/travel_tip_item_view" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fabSos"
+        android:layout_marginEnd="18dp"
+        android:visibility="invisible"
+        app:layout_anchor="@id/view2"
+        android:backgroundTint="@color/red"
+        app:layout_anchorGravity="top|end"
+        app:srcCompat="@drawable/caution"
+        app:tint="@color/white"
+        app:maxImageSize="24dp"
+        android:contentDescription="SOS"
+        tools:visibility="invisible" />
+    <View
+        android:id="@+id/view2"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        app:layout_anchor="@id/fabStop"
+        app:layout_anchorGravity="top|end" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="18dp"
+        android:visibility="invisible"
+        app:layout_anchor="@id/view1"
+        android:backgroundTint="@color/red"
+        app:layout_anchorGravity="top|end"
+        app:srcCompat="@drawable/stop"
+        app:tint="@null"
+        app:maxImageSize="16dp"
+        android:contentDescription="Stop"
+        tools:visibility="invisible"/>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        app:layout_anchor="@id/driverSheet"
+        app:layout_anchorGravity="top|end" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

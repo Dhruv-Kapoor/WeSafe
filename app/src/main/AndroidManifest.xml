@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.wesafe">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.WeSafe">
+        <activity android:name=".TrackFriendsActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".SignUpActivity" />
+        <activity
+            android:name=".ComplaintsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FeedbackActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FamilyActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DangerZonesActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TravelActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ArticleViewActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SplashActivity"
+            android:theme="@style/LauncherTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+
+        <service android:name=".services.TravelService" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_api_key" />
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr" />
+    </application>
+
+</manifest>
